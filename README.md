@@ -1,6 +1,6 @@
 # Vite plugin which can import modules asynchronously from CDN.
 
-This plugin is forked from [vite-plugin-cdn-import](https://github.com/MMF-FE/vite-plugin-cdn-import) and allows you to specify modules to be loaded in **defer/async** mode in addition.
+This plugin is forked from [vite-plugin-cdn-import](https://github.com/MMF-FE/vite-plugin-cdn-import) and allows you to specify modules that should be loaded in **defer/async** mode in addition.
 
 # Installation
 
