@@ -4,7 +4,7 @@ import path from 'path'
 import { Plugin, UserConfig } from 'vite'
 import { Module, Options } from './type'
 import autoComplete from './autoComplete'
-import { generateScript, filterModulesByInputHtml } from './helper'
+import { generateScript, filterModulesByInputHtml, resetHanlerFlag } from './helper'
 
 /**
  * get npm module version
@@ -142,6 +142,7 @@ function PluginImportToCDN(options: Options): Plugin[] {
                 return userConfig
             },
             transformIndexHtml(html) {
+                resetHanlerFlag()
                 html = filterModulesByInputHtml(html, data)
                 const cssCode = data
                     .filter(m => !m.ignore)

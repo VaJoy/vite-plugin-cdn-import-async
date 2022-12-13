@@ -1,7 +1,12 @@
 import { Module } from './type'
 
 let isAsyncHandlerGenerated = false
-let isDeferredHandlerGenerate = false
+let isDeferredHandlerGenerated = false
+
+export function resetHanlerFlag() {
+  isAsyncHandlerGenerated = false
+  isDeferredHandlerGenerated = false
+}
 
 function generateAsyncHandlerTemplate() {
   let result = ''
@@ -15,8 +20,8 @@ function generateAsyncHandlerTemplate() {
 
 function generateDeferredHandlerTemplate() {
   let result = generateAsyncHandlerTemplate()
-  if (!isDeferredHandlerGenerate) {
-    isDeferredHandlerGenerate = true
+  if (!isDeferredHandlerGenerated) {
+    isDeferredHandlerGenerated = true
     result += `<script>function __cdnImportAsync_deferredLoader(n,r){var c=document.createElement("script");c.onload=function(){__cdnImportAsyncHandler(n)},c.onerror=function(){__cdnImportAsyncHandler(n,!0)},c.src=r,document.body.appendChild(c)}</script>\n`
   }
   
@@ -70,6 +75,6 @@ export function filterModulesByInputHtml(html: string, modules: Module[]) {
         module.mode = isUsed
       }
     })
-    return `<meta ${contentLeft.trim()} ${contentRight.trim()}>`
+    return _
   })
 }
