@@ -255,7 +255,7 @@ Once a module is loaded asynchronously by `mode` config, you should create an fu
 ```js
 export function cdnAsyncImport(moduleName: string, isDev: boolean): Promise<any> {
   if (isDev) {
-    return import(moduleName)
+    return Promise.reject()
   }
 
   return new Promise((resolve, rejects) => {
@@ -286,7 +286,7 @@ cdnAsyncImport('lottie-web', import.meta.env.DEV).then(lottie => {
   // Async module has been successfully loaded.
   console.log(lottie)
 }).catch(() => {
-  // Handle the Error case
+  // Handling DEV or Error case
   import('lottie-web').then(...)
 })
 ```
