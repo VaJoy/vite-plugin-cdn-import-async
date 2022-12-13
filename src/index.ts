@@ -149,16 +149,25 @@ function PluginImportToCDN(options: Options): Plugin[] {
                     .filter(v => v)
                     .join('\n')
 
-                const jsCode = !isBuild
+                const jsCodeNormal = !isBuild
                     ? ''
                     : data
                         .filter(m => !m.ignore)
+                        .filter(m => !m.mode)
                         .map(p => p.pathList.map(url => generateScript(url, p)).join('\n'))
                         .join('\n')
+                
+                const jsCodeAsync = !isBuild
+                ? ''
+                : data
+                    .filter(m => !m.ignore)
+                    .filter(m => m.mode)
+                    .map(p => p.pathList.map(url => generateScript(url, p)).join('\n'))
+                    .join('\n')
 
                 return html.replace(
                     /<\/title>/i,
-                    `</title>${cssCode}\n${jsCode}`
+                    `</title>${cssCode}\n${jsCodeNormal}\n${jsCodeAsync}`
                 )
             },
         },

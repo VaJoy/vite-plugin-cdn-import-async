@@ -13,12 +13,13 @@ export default defineConfig({
                 {
                     name: 'react',
                     var: 'React',
+                    mode: 'DOMContentLoaded',
                     path: `https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js`,
                 },
                 {
                     name: 'lottie-web',
                     var: 'lottie',
-                    mode: 'defer', // 'defer' atrribute will be added to its <script> tag.
+                    mode: '300',
                     path: `https://cdn.jsdelivr.net/npm/lottie-web@5.10.0/build/player/lottie.min.js`,
                 },
                 {

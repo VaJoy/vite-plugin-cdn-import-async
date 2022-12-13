@@ -181,6 +181,71 @@ According to `React@async` within `data-cdn-import`, the **React** module will g
 </html>
 ```
 
+### Lazy loading
+
+In addition to `async` or `defer` as the value of `mode`, here's other avalable values for lazy-loading:
+
+|  value   | usage  |
+|  ----  | ----  |
+| DOMContentLoaded  | Module will be loaded within `DOMContentLoaded` event of `window`. |
+| load  | Module will be loaded within `load` event of `window`. |
+| [milliseconds]  | Module will start loading in specified milliseconds as `load` event emits. |
+
+**Example**
+
+In `vite.config.js`:
+
+```js
+export default defineConfig({
+    plugins: [
+        importToCDN({
+            modules: [
+                autoComplete('react-dom'),
+                autoComplete('moment'),
+                autoComplete('antd'),
+                {
+                    name: 'react',
+                    var: 'React',
+                    mode: 'DOMContentLoaded',
+                    path: `https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js`,
+                },
+                {
+                    name: 'lottie-web',
+                    var: 'lottie',
+                    mode: '3000',
+                    path: `https://cdn.jsdelivr.net/npm/lottie-web@5.10.0/build/player/lottie.min.js`,
+                },
+                {
+                    name: 'axios',
+                    var: 'axios',
+                    mode: 'load',
+                    path: 'https://cdn.jsdelivr.net/npm/axios@1.2.1/dist/axios.min.js',
+                }
+            ],
+        }),
+        reactRefresh(),
+    ],
+})
+```
+
+Or the entry file:
+
+```html
+<meta data-cdn-import="React@DOMContentLoaded,lottie@3000,axios@load" />
+```
+
+The output file would be like:
+
+```html
+    <script>function __cdnImportAsyncHandler(o,n){n&&window.cdnImportAsync_loadingErrorModules.push(o);var d=new CustomEvent("asyncmoduleloaded",{detail:{module:o,isError:!!n}});window.dispatchEvent(d)}window.cdnImportAsync_loadingErrorModules=window.cdnImportAsync_loadingErrorModules||[];</script>
+    <script>function __cdnImportAsync_deferredLoader(n,r){var c=document.createElement("script");c.onload=function(){__cdnImportAsyncHandler(n)},c.onerror=function(){__cdnImportAsyncHandler(n,!0)},c.src=r,document.body.appendChild(c)}</script>
+    <link rel="prefetch" href="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js" />
+    <script>!function(){window.addEventListener("DOMContentLoaded",function e(){__cdnImportAsync_deferredLoader("React","https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"),window.removeEventListener("DOMContentLoaded",e)},!1)}();</script>
+    <link rel="prefetch" href="https://cdn.jsdelivr.net/npm/lottie-web@5.10.0/build/player/lottie.min.js" />
+    <script>!function(){window.addEventListener("load",function e(){setTimeout(function(){__cdnImportAsync_deferredLoader("lottie","https://cdn.jsdelivr.net/npm/lottie-web@5.10.0/build/player/lottie.min.js")},3000),window.removeEventListener("load",e)},!1)}();</script>
+    <link rel="prefetch" href="https://cdn.jsdelivr.net/npm/axios@1.2.1/dist/axios.min.js" />
+    <script>!function(){window.addEventListener("load",function e(){__cdnImportAsync_deferredLoader("axios","https://cdn.jsdelivr.net/npm/axios@1.2.1/dist/axios.min.js"),window.removeEventListener("load",e)},!1)}();</script>
+···
 
 ## Other ussages
 
