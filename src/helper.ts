@@ -2,6 +2,7 @@ import { Module } from './type'
 
 let isAsyncHandlerGenerated = false
 let isDeferredHandlerGenerated = false
+const varToNameMap: any = {}
 
 export function resetHanlerFlag() {
   isAsyncHandlerGenerated = false
@@ -35,13 +36,16 @@ function generatePrefetchTemplate(url: string) {
 export function generateScript(url: string, p?: Module) {
   let result = ''
   if (p && (p.mode === 'async' || p.mode === 'defer')) {
+    varToNameMap[p.var] = p.name
     result = generateAsyncHandlerTemplate()
     result += `<script ${p.mode} onload="__cdnImportAsyncHandler('${p.var}')" onerror="__cdnImportAsyncHandler('${p.var}', true)" src="${url}"></script>`
   } else if (p && (p.mode === 'DOMContentLoaded' || p.mode === 'load')) {
+    varToNameMap[p.var] = p.name
     result += generateDeferredHandlerTemplate()
     result += generatePrefetchTemplate(url)
     result += `<script>!function(){window.addEventListener("${p.mode}",function e(){__cdnImportAsync_deferredLoader("${p.var}","${url}"),window.removeEventListener("${p.mode}",e)},!1)}();</script>`
   } else if (p && typeof p.mode === 'string' && p.mode.match(/^[0-9]+$/)) {
+    varToNameMap[p.var] = p.name
     result += generateDeferredHandlerTemplate()
     result += generatePrefetchTemplate(url)
     result += `<script>!function(){window.addEventListener("load",function e(){setTimeout(function(){__cdnImportAsync_deferredLoader("${p.var}","${url}")},${p.mode}),window.removeEventListener("load",e)},!1)}();</script>`
@@ -77,4 +81,13 @@ export function filterModulesByInputHtml(html: string, modules: Module[]) {
     })
     return _
   })
+}
+
+export function generateVarToNameScript() {
+  let result = ''
+  const vars = Object.keys(varToNameMap)
+  if (vars.length) {
+    result = `<script>window.__cdnImportAsync_varToNameMap=${JSON.stringify(varToNameMap)};</script>\n`
+  }
+  return result
 }

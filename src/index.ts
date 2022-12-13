@@ -4,7 +4,7 @@ import path from 'path'
 import { Plugin, UserConfig } from 'vite'
 import { Module, Options } from './type'
 import autoComplete from './autoComplete'
-import { generateScript, filterModulesByInputHtml, resetHanlerFlag } from './helper'
+import { generateScript, filterModulesByInputHtml, resetHanlerFlag, generateVarToNameScript } from './helper'
 
 /**
  * get npm module version
@@ -166,9 +166,11 @@ function PluginImportToCDN(options: Options): Plugin[] {
                     .map(p => p.pathList.map(url => generateScript(url, p)).join('\n'))
                     .join('\n')
 
+                const varToNameCode = generateVarToNameScript()
+
                 return html.replace(
                     /<\/title>/i,
-                    `</title>${cssCode}\n${jsCodeNormal}\n${jsCodeAsync}`
+                    `</title>${cssCode}\n${jsCodeNormal}\n${varToNameCode}\n${jsCodeAsync}`
                 )
             },
         },
