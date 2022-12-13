@@ -170,7 +170,7 @@ According to `React@async` within `data-cdn-import`, the **React** module will g
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Example</title>
-    <script>window.__cdnImportAsync_varToNameMap={"React":"react","lottie":"lottie-web"};</script>
+    <script>window.__cdnImportAsync_nameToVar={"react":"React","lottie-web":"lottie"};</script>
     <script>function __cdnImportAsyncHandler(o,n){n&&window.cdnImportAsync_loadingErrorModules.push(o);var d=new CustomEvent("asyncmoduleloaded",{detail:{module:o,isError:!!n}});window.dispatchEvent(d)}window.cdnImportAsync_loadingErrorModules=window.cdnImportAsync_loadingErrorModules||[];</script>
     <script async onload="__cdnImportAsyncHandler('React')" onerror="__cdnImportAsyncHandler('React', true)" src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
     <script defer onload="__cdnImportAsyncHandler('lottie')" onerror="__cdnImportAsyncHandler('lottie', true)" src="https://cdn.jsdelivr.net/npm/lottie-web@5.10.0/build/player/lottie.min.js"></script>
@@ -236,7 +236,7 @@ Or the entry file:
 The output file would be like:
 
 ```html
-    <script>window.__cdnImportAsync_varToNameMap={"React":"react","lottie":"lottie-web","axios":"axios"};</script>
+    <script>window.__cdnImportAsync_nameToVar={"react":"React","lottie-web":"lottie"};</script>
     <script>function __cdnImportAsyncHandler(o,n){n&&window.cdnImportAsync_loadingErrorModules.push(o);var d=new CustomEvent("asyncmoduleloaded",{detail:{module:o,isError:!!n}});window.dispatchEvent(d)}window.cdnImportAsync_loadingErrorModules=window.cdnImportAsync_loadingErrorModules||[];</script>
     <script>function __cdnImportAsync_deferredLoader(n,r){var c=document.createElement("script");c.onload=function(){__cdnImportAsyncHandler(n)},c.onerror=function(){__cdnImportAsyncHandler(n,!0)},c.src=r,document.body.appendChild(c)}</script>
     <link rel="prefetch" href="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js" />
@@ -253,13 +253,14 @@ The output file would be like:
 Once a module is loaded asynchronously by `mode` config, you should create an function to handle it while using it in pages:
 
 ```js
-function cdnAsyncImport(moduleVar: string, isDev: boolean): Promise<any> {
+export function cdnAsyncImport(moduleName: string, isDev: boolean): Promise<any> {
   if (isDev) {
-    return import(window.__cdnImportAsync_varToNameMap[moduleVar])
+    return import(moduleName)
   }
 
   return new Promise((resolve, rejects) => {
     const errorModules = window.cdnImportAsync_loadingErrorModules || []
+    const moduleVar = window.__cdnImportAsync_nameToVar[moduleName]
     if (errorModules.includes(moduleVar)) {
       rejects()
     } else if (window[moduleVar]) {
@@ -281,7 +282,7 @@ function cdnAsyncImport(moduleVar: string, isDev: boolean): Promise<any> {
   })
 }
 
-cdnAsyncImport('lottie', import.meta.env.DEV).then(lottie => {
+cdnAsyncImport('lottie-web', import.meta.env.DEV).then(lottie => {
   // Async module has been successfully loaded.
   console.log(lottie)
 }).catch(() => {
