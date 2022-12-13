@@ -185,7 +185,7 @@ According to `React@async` within `data-cdn-import`, the **React** module will g
 
 In addition to `async` or `defer` as the value of `mode`, here's other avalable values for lazy-loading:
 
-|  value   | usage  |
+|  value of `mode`   | usage  |
 |  ----  | ----  |
 | DOMContentLoaded  | Module will be loaded within `DOMContentLoaded` event of `window`. |
 | load  | Module will be loaded within `load` event of `window`. |
@@ -245,7 +245,7 @@ The output file would be like:
     <script>!function(){window.addEventListener("load",function e(){setTimeout(function(){__cdnImportAsync_deferredLoader("lottie","https://cdn.jsdelivr.net/npm/lottie-web@5.10.0/build/player/lottie.min.js")},3000),window.removeEventListener("load",e)},!1)}();</script>
     <link rel="prefetch" href="https://cdn.jsdelivr.net/npm/axios@1.2.1/dist/axios.min.js" />
     <script>!function(){window.addEventListener("load",function e(){__cdnImportAsync_deferredLoader("axios","https://cdn.jsdelivr.net/npm/axios@1.2.1/dist/axios.min.js"),window.removeEventListener("load",e)},!1)}();</script>
-···
+```
 
 ## Other ussages
 
