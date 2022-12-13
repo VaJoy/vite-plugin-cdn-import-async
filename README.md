@@ -187,9 +187,9 @@ In addition to `async` or `defer` as the value of `mode`, here's other avalable 
 
 |  value of `mode`   | usage  |
 |  ----  | ----  |
-| DOMContentLoaded  | Module will start loading within `DOMContentLoaded` event of `window`. |
-| load  | Module will start loading within `load` event of `window`. |
-| [milliseconds]  | Module will start loading in specified milliseconds as `load` event emits. |
+| DOMContentLoaded  | Module will start being loaded within `DOMContentLoaded` event of `window`. |
+| load  | Module will start being loaded within `load` event of `window`. |
+| [milliseconds]  | Module will start being loaded in specified milliseconds after `load` event emits. |
 
 **Example**
 
