@@ -20,7 +20,7 @@ yarn add  vite-plugin-cdn-import-async -D
 
 ## Plugin config
 
-Specify `mode` param whthin configs of the module you want to import asynchronously from CDN:
+Specify `async` or `defer` to `mode` param whthin configs of the module you want to import asynchronously from CDN:
 
 ```js
 // vite.config.js
