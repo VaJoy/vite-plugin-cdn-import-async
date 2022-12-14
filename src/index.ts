@@ -166,7 +166,7 @@ function PluginImportToCDN(options: Options): Plugin[] {
                     .map(p => p.pathList.map(url => generateScript(url, p)).join('\n'))
                     .join('\n')
 
-                const nameToVarCode = generateNameToVarScript()
+                const nameToVarCode = !isBuild ? '' : generateNameToVarScript()
                 return html.replace(
                     /<\/title>/i,
                     `</title>${cssCode}\n${jsCodeNormal}\n${nameToVarCode}\n${jsCodeAsync}`
