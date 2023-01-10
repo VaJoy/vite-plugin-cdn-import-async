@@ -144,15 +144,15 @@ export default function autoComplete(name: ModuleName) {
 	return (prodUrl: string) => {
 		if (isCdnjs(prodUrl)){
 			throw new Error(`The configuration of module ${name} in ${prodUrl} does not exist `)
-        } else {
-            if (!(isJsdeliver(prodUrl) || isUnpkg(prodUrl))) {
-                console.warn('Unknown prodUrl, using the jsdeliver rule')
-            }
-            return {
-				name,
-				var: config.var,
-				...config.jsdeliver
-			} as Module
-        }
+		} else {
+				if (!(isJsdeliver(prodUrl) || isUnpkg(prodUrl))) {
+						console.warn('Unknown prodUrl, using the jsdeliver rule')
+				}
+				return {
+					name,
+					var: config.var,
+					...config.jsdeliver
+				} as Module
+		}
 	}
 }

@@ -42,12 +42,12 @@ export function generateScript(url: string, p?: Module) {
   } else if (p && (p.mode === 'DOMContentLoaded' || p.mode === 'load')) {
     nameToVar[p.name] = p.var
     result += generateDeferredHandlerTemplate()
-    result += generatePrefetchTemplate(url)
+    // result += generatePrefetchTemplate(url)
     result += `<script>!function(){window.addEventListener("${p.mode}",function e(){__cdnImportAsync_deferredLoader("${p.var}","${url}"),window.removeEventListener("${p.mode}",e)},!1)}();</script>`
   } else if (p && typeof p.mode === 'string' && p.mode.match(/^[0-9]+$/)) {
     nameToVar[p.name] = p.var
     result += generateDeferredHandlerTemplate()
-    result += generatePrefetchTemplate(url)
+    // result += generatePrefetchTemplate(url)
     result += `<script>!function(){window.addEventListener("load",function e(){setTimeout(function(){__cdnImportAsync_deferredLoader("${p.var}","${url}")},${p.mode}),window.removeEventListener("load",e)},!1)}();</script>`
   } else {
     result = `<script src="${url}"></script>`

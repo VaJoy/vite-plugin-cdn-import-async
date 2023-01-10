@@ -157,7 +157,6 @@ function PluginImportToCDN(options: Options): Plugin[] {
                         .filter(m => !m.mode)
                         .map(p => p.pathList.map(url => generateScript(url, p)).join('\n'))
                         .join('\n')
-                
                 const jsCodeAsync = !isBuild
                 ? ''
                 : data

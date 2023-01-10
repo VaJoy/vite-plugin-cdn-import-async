@@ -239,11 +239,8 @@ The output file would be like:
     <script>window.__cdnImportAsync_nameToVar={"react":"React","lottie-web":"lottie"};</script>
     <script>function __cdnImportAsyncHandler(o,n){n&&window.cdnImportAsync_loadingErrorModules.push(o);var d=new CustomEvent("asyncmoduleloaded",{detail:{module:o,isError:!!n}});window.dispatchEvent(d)}window.cdnImportAsync_loadingErrorModules=window.cdnImportAsync_loadingErrorModules||[];</script>
     <script>function __cdnImportAsync_deferredLoader(n,r){var c=document.createElement("script");c.onload=function(){__cdnImportAsyncHandler(n)},c.onerror=function(){__cdnImportAsyncHandler(n,!0)},c.src=r,document.body.appendChild(c)}</script>
-    <link rel="prefetch" href="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js" />
     <script>!function(){window.addEventListener("DOMContentLoaded",function e(){__cdnImportAsync_deferredLoader("React","https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"),window.removeEventListener("DOMContentLoaded",e)},!1)}();</script>
-    <link rel="prefetch" href="https://cdn.jsdelivr.net/npm/lottie-web@5.10.0/build/player/lottie.min.js" />
     <script>!function(){window.addEventListener("load",function e(){setTimeout(function(){__cdnImportAsync_deferredLoader("lottie","https://cdn.jsdelivr.net/npm/lottie-web@5.10.0/build/player/lottie.min.js")},3000),window.removeEventListener("load",e)},!1)}();</script>
-    <link rel="prefetch" href="https://cdn.jsdelivr.net/npm/axios@1.2.1/dist/axios.min.js" />
     <script>!function(){window.addEventListener("load",function e(){__cdnImportAsync_deferredLoader("axios","https://cdn.jsdelivr.net/npm/axios@1.2.1/dist/axios.min.js"),window.removeEventListener("load",e)},!1)}();</script>
   
 ```

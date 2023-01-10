@@ -1,6 +1,6 @@
 {
     "name": "vite-plugin-cdn-import-async",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "Import packages asynchronously from CDN for the vite plugin",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
