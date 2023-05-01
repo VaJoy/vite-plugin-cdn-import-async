@@ -73,17 +73,17 @@ function PluginImportToCDN(options: Options): Plugin[] {
             pathList = v.path
         }
 
-        const data = {
+        const module = {
             ...v,
             version
         }
 
         pathList = pathList.map(p => {
             if (!version && !isFullPath(p)) {
-                throw new Error(`modules: ${data.name} package.json file does not exist`)
+                throw new Error(`modules: ${module.name} package.json file does not exist`)
             }
-            return renderUrl(prodUrl, {
-                ...data,
+            return renderUrl(module.prodUrl ?? prodUrl, {
+                ...module,
                 path: p
             })
         })
@@ -93,14 +93,13 @@ function PluginImportToCDN(options: Options): Plugin[] {
             css = [css]
         }
 
-        const cssList = !Array.isArray(css) ? [] : css.map(c => renderUrl(prodUrl, {
-            ...data,
+        const cssList = !Array.isArray(css) ? [] : css.map(c => renderUrl(module.prodUrl ?? prodUrl, {
+            ...module,
             path: c
         }))
 
         return {
-            ...v,
-            version,
+            ...module,
             pathList,
             cssList
         }

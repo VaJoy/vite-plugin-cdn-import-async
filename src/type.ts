@@ -1,5 +1,6 @@
 
 export interface Module {
+    prodUrl?: string
     name: string
     var: string
     path: string | string[]
