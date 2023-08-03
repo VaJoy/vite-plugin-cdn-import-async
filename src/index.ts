@@ -120,7 +120,7 @@ function PluginImportToCDN(options: Options): Plugin[] {
             ...externalGlobals(externalMap),
             enforce: 'post',
             apply: 'build'
-        }
+        },
         {
             name: 'vite-plugin-cdn-import-async',
             config(_, { command }) {
