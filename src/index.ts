@@ -117,6 +117,11 @@ function PluginImportToCDN(options: Options): Plugin[] {
 
     const plugins: Plugin[] = [
         {
+            ...externalGlobals(externalMap),
+            enforce: 'post',
+            apply: 'build'
+        }
+        {
             name: 'vite-plugin-cdn-import-async',
             config(_, { command }) {
                 const userConfig: UserConfig = {
@@ -129,8 +134,7 @@ function PluginImportToCDN(options: Options): Plugin[] {
                     isBuild = true
 
                     userConfig!.build!.rollupOptions = {
-                        external: [...externalLibs],
-                        plugins: [externalGlobals(externalMap)]
+                        external: [...externalLibs]
                     }
 
 
